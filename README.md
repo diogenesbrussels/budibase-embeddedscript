@@ -17,6 +17,9 @@ Create a table with the following columns:
 - parent (options with values: parent, body, component) Where the script should be appended
 - inBuilder (boolean) Does the script execute in Builder
 
+  ![image](https://github.com/diogenesbrussels/budibase-embeddedscript/assets/91942877/aff598d6-6c8c-4788-b95b-4d950712e569)
+
+
 Add the component, select your newly created table and filter by collection name if needed.
 
 ## Known issues
