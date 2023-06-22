@@ -10,6 +10,7 @@
     "watch": "rollup -cw"
   },
   "dependencies": {
+    "@budibase/string-templates": "^2.7.28",
     "@crownframework/svelte-error-boundary": "^1.0.3",
     "svelte": "^3.49.0"
   },

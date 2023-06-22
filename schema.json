@@ -8,9 +8,15 @@
     "icon": "Text",
     "settings": [
       {
+        "type": "table",
+        "label": "Table with your scripts",
+        "key": "table",
+        "required": true
+      },
+      {
         "type": "text",
-        "key": "text",
-        "label": "Text"
+        "key": "collection",
+        "label": "Collection"
       }
     ]
   }
