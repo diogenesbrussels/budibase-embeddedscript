@@ -1,9 +1,9 @@
 <script>
   import { getContext } from "svelte";
   import { onMount } from "svelte";
-  import { processStringSync } from "@budibase/string-templates";
+  import { processString } from "@budibase/string-templates";
 
-  export let collection, table;
+  export let collection, table, contextObject;
 
   const { styleable, API } = getContext("sdk");
   const component = getContext("component");
@@ -18,10 +18,22 @@
       body: { query: { equal: { "1:collection": collection } } },
     });
 
+    let combinedContext;
+    // Check if contextObject is a valid object
+    if (typeof contextObject === "object" && contextObject !== null) {
+      combinedContext = { ...component, ...contextObject };
+    } else {
+      combinedContext = component;
+    }
+
     for (const scriptRow of scriptCollection.rows) {
       let parentElement;
       let script = document.createElement("script");
-      script.innerHTML = processStringSync(scriptRow.content, component);
+
+      script.innerHTML = await processString(
+        scriptRow.content,
+        combinedContext
+      );
 
       if (inBuilder && scriptRow.inBuilder) {
         if (scriptRow.parent == "head") {

@@ -16,7 +16,12 @@
       {
         "type": "text",
         "key": "collection",
-        "label": "Collection"
+        "label": "Scripts collection to load"
+      },
+      {
+        "type": "text",
+        "key": "contextObject",
+        "label": "Context object"
       }
     ]
   }
