@@ -5,7 +5,7 @@
     "name": "budibase-embeddedscript",
     "friendlyName": "budibase-embeddedscript",
     "description": "Embed js scripts from your DB into your app",
-    "icon": "Text",
+    "icon": "GearsAdd",
     "settings": [
       {
         "type": "table",
