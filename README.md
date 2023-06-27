@@ -52,6 +52,7 @@ inBuilder: false
 
 ## Known issues
 
+- The Content Security Policy prevents loading a script from a different domain
 - Handlebars are parsed but can't access the live Budibase context
 
 ## Instructions for devs
