@@ -11,51 +11,52 @@
   const inBuilder = $builderStore.inBuilder;
 
   onMount(async () => {
-    let scriptContainer = document.getElementById("scriptContainer");
+    try {
+      const scriptContainer = document.getElementById("scriptContainer");
 
-    let scriptCollection = await API.post({
-      url: `/api/` + table.tableId + `/search`,
-      body: { query: { equal: { "1:collection": collection } } },
-    });
+      const scriptCollection = await API.post({
+        url: `/api/` + table.tableId + `/search`,
+        body: { query: { equal: { "1:collection": collection } } },
+      });
 
-    let combinedContext;
-    // Check if contextObject is a valid object
-    if (typeof contextObject === "object" && contextObject !== null) {
-      combinedContext = { ...component, ...contextObject };
-    } else {
-      combinedContext = component;
-    }
+      const combinedContext =
+        typeof contextObject === "object" && contextObject !== null
+          ? { ...component, ...contextObject }
+          : component;
 
-    for (const scriptRow of scriptCollection.rows) {
-      let parentElement;
-      let script = document.createElement("script");
+      for (const scriptRow of scriptCollection.rows) {
+        let parentElement;
+        let script = document.createElement("script");
 
-      script.innerHTML = await processString(
-        scriptRow.content,
-        combinedContext
-      );
+        script.innerHTML = await processString(
+          scriptRow.content,
+          combinedContext
+        );
 
-      if (inBuilder && scriptRow.inBuilder) {
-        if (scriptRow.parent == "head") {
-          parentElement = document.head;
-        } else if (scriptRow.parent == "body") {
-          parentElement = document.body;
-        } else if (scriptRow.parent == "component") {
-          parentElement = scriptContainer;
+        if (inBuilder && scriptRow.inBuilder) {
+          if (scriptRow.parent == "head") {
+            parentElement = document.head;
+          } else if (scriptRow.parent == "body") {
+            parentElement = document.body;
+          } else if (scriptRow.parent == "component") {
+            parentElement = scriptContainer;
+          }
+          parentElement.appendChild(script);
         }
-        parentElement.appendChild(script);
-      }
 
-      if (!inBuilder) {
-        if (scriptRow.parent == "head") {
-          parentElement = document.head;
-        } else if (scriptRow.parent == "body") {
-          parentElement = document.body;
-        } else if (scriptRow.parent == "component") {
-          parentElement = scriptContainer;
+        if (!inBuilder) {
+          if (scriptRow.parent == "head") {
+            parentElement = document.head;
+          } else if (scriptRow.parent == "body") {
+            parentElement = document.body;
+          } else if (scriptRow.parent == "component") {
+            parentElement = scriptContainer;
+          }
+          parentElement.appendChild(script);
         }
-        parentElement.appendChild(script);
       }
+    } catch (error) {
+      console.error("An error occurred:", error);
     }
   });
 </script>
