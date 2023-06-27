@@ -30,6 +30,26 @@ return { CurrentUser: $("Current User.email"), search: $("State.search_text")};
 ```
 Then use {{ CurrentUser }} in your script's content
 
+## Example
+
+To add Google Analytics tracking
+
+Row 1 (loading external script):
+```
+content: https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXX
+collection: analytics
+parent: head
+inBuilder: false
+```
+
+Row 2 (init gtag object):
+```
+content: window.dataLayer = window.dataLayer || [];   function gtag(){dataLayer.push(arguments);}   gtag('js', new Date());    gtag('config', 'G-XXXXXXXXX');
+collection: analytics
+parent: body
+inBuilder: false
+```
+
 ## Known issues
 
 - Handlebars are parsed but can't access the live Budibase context
