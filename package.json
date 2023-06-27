@@ -1,6 +1,6 @@
 {
   "name": "budibase-embeddedscript",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Embed js scripts from your DB into your app",
   "license": "MIT",
   "svelte": "index.js",
