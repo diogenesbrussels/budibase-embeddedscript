@@ -5,6 +5,10 @@
   "license": "MIT",
   "svelte": "index.js",
   "module": "dist/plugin.min.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/diogenesbrussels/budibase-embeddedscript.git"
+  },
   "scripts": {
     "build": "rollup -c",
     "watch": "rollup -cw"
