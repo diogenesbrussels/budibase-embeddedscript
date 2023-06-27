@@ -28,10 +28,15 @@
         let parentElement;
         let script = document.createElement("script");
 
-        script.innerHTML = await processString(
-          scriptRow.content,
-          combinedContext
-        );
+        // Test if content is a valid URL 
+        try {
+          script.src = new URL(scriptRow.content);
+        } catch (_) {
+          script.innerHTML = await processString(
+            scriptRow.content,
+            combinedContext
+          );
+        }
 
         if (inBuilder && scriptRow.inBuilder) {
           if (scriptRow.parent == "head") {
