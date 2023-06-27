@@ -22,6 +22,14 @@ Create a table with the following columns:
 
 Add the component, select your newly created table and filter by collection name if needed.
 
+You can expose values to the handlebars context via the Context Object.
+
+Example value
+```
+return { CurrentUser: $("Current User.email"), search: $("State.search_text")};
+```
+Then use {{ CurrentUser }} in your script's content
+
 ## Known issues
 
 - Handlebars are parsed but can't access the live Budibase context
