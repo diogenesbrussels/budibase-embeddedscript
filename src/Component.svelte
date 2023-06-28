@@ -28,9 +28,12 @@
         let parentElement;
         let script = document.createElement("script");
 
-        // Test if content is a valid URL 
+        // Test if content is a valid URL and try to fetch content 
         try {
-          script.src = new URL(scriptRow.content);
+          let response = await fetch (new URL(scriptRow.content));
+          if(response.ok) {
+            script.innerHTML = await response.text();
+          }
         } catch (_) {
           script.innerHTML = await processString(
             scriptRow.content,
