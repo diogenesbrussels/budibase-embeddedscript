@@ -28,17 +28,19 @@
         let parentElement;
         let script = document.createElement("script");
 
-        // Test if content is a valid URL and try to fetch content 
+        // Test if content is a valid URL and try to fetch content
         try {
-          let response = await fetch (new URL(scriptRow.content));
-          if(response.ok) {
+          let response = await fetch(new URL(scriptRow.content));
+          if (response.ok) {
             script.innerHTML = await response.text();
           }
-        } catch (_) {
-          script.innerHTML = await processString(
-            scriptRow.content,
-            combinedContext
-          );
+        } catch (error) {
+          if (!error.message.startsWith("NetworkError")) {
+            script.innerHTML = await processString(
+              scriptRow.content,
+              combinedContext
+            );
+          }
         }
 
         if (inBuilder && scriptRow.inBuilder) {
